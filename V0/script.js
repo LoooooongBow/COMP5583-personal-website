@@ -5,8 +5,6 @@ const translations = {
     navProjects: "Project",
     navContact: "Contact",
     homeIntro: "I’m MSc Student at The Hong Kong Polytechnic University.",
-    learnMore: "Learn more about me",
-    viewProjects: "View projects",
     avatarPlaceholder: "Photo will be added later",
     aboutEyebrow: "Profile",
     aboutTitle: "About",
@@ -45,8 +43,6 @@ const translations = {
     navProjects: "项目",
     navContact: "联系",
     homeIntro: "我目前就读于香港理工大学硕士项目。",
-    learnMore: "了解更多",
-    viewProjects: "查看项目",
     avatarPlaceholder: "头像将在后续添加",
     aboutEyebrow: "个人信息",
     aboutTitle: "关于",
@@ -283,7 +279,19 @@ updateActiveNav();
 
 if (window.location.hash) {
   const initialTarget = document.querySelector(window.location.hash);
+
   if (initialTarget) {
-    requestAnimationFrame(() => scrollToSection(initialTarget));
+    requestAnimationFrame(() => {
+      updateHeaderHeight();
+      const headerHeight = header.getBoundingClientRect().height;
+      const targetTop = initialTarget.id === "home"
+        ? 0
+        : initialTarget.getBoundingClientRect().top + window.scrollY - headerHeight - 12;
+
+      window.scrollTo({ top: Math.max(0, targetTop), behavior: "auto" });
+      setActiveNav(initialTarget.id);
+
+      requestAnimationFrame(updateActiveNav);
+    });
   }
 }
