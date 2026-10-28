@@ -161,20 +161,31 @@ function setActiveNav(sectionId) {
 
 function updateActiveNav() {
   const headerHeight = header.getBoundingClientRect().height;
-  const marker = window.scrollY + headerHeight + 36;
+  const probeY = headerHeight + 24;
   const pageBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
 
-  let activeSection = sections[0];
-
   if (pageBottom) {
-    activeSection = sections[sections.length - 1];
-  } else {
-    for (const section of sections) {
-      if (section.offsetTop <= marker) {
-        activeSection = section;
-      } else {
-        break;
-      }
+    setActiveNav(sections[sections.length - 1].id);
+    return;
+  }
+
+  // Pick the section that actually occupies the point immediately below the fixed header.
+  // Using viewport rectangles avoids offsetTop drift after responsive reflow or project collapse.
+  let activeSection = sections[0];
+  let closestDistance = Number.POSITIVE_INFINITY;
+
+  for (const section of sections) {
+    const rect = section.getBoundingClientRect();
+
+    if (rect.top <= probeY && rect.bottom > probeY) {
+      activeSection = section;
+      break;
+    }
+
+    const distance = Math.min(Math.abs(rect.top - probeY), Math.abs(rect.bottom - probeY));
+    if (distance < closestDistance) {
+      closestDistance = distance;
+      activeSection = section;
     }
   }
 
@@ -184,12 +195,18 @@ function updateActiveNav() {
 function scrollToSection(target) {
   updateHeaderHeight();
   const headerHeight = header.getBoundingClientRect().height;
-  const targetTop = target.getBoundingClientRect().top + window.scrollY - headerHeight - 16;
+  const isHome = target.id === "home";
+  const targetTop = isHome
+    ? 0
+    : target.getBoundingClientRect().top + window.scrollY - headerHeight - 12;
 
   window.scrollTo({
     top: Math.max(0, targetTop),
     behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"
   });
+
+  // Keep click feedback correct immediately, while the smooth scroll is still in progress.
+  setActiveNav(target.id);
 }
 
 languageToggle.addEventListener("click", () => {

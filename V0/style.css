@@ -39,7 +39,7 @@ html {
 
 body {
   margin: 0;
-  padding: 0;
+  padding: var(--header-height) 0 0;
   min-height: 100vh;
   overflow-x: hidden;
   background: var(--bg);
@@ -60,15 +60,31 @@ a {
 }
 
 .site-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 1000;
   width: 100%;
   margin: 0;
-  border-top: 0;
+  padding: 0;
+  border: 0;
   border-bottom: 1px solid var(--border);
-  background: var(--bg);
+  background-color: var(--bg);
   box-shadow: none;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  isolation: isolate;
+}
+
+/* Covers sub-pixel/overscroll seams that can otherwise appear above a fixed header. */
+.site-header::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 0;
+  top: -6px;
+  height: 7px;
+  background-color: var(--bg);
 }
 
 .header-inner {
