@@ -4,7 +4,6 @@ const translations = {
     navAbout: "About",
     navProjects: "Project",
     navContact: "Contact",
-    homeEyebrow: "Academic Homepage",
     homeIntro: "I’m MSc Student at The Hong Kong Polytechnic University.",
     learnMore: "Learn more about me",
     viewProjects: "View projects",
@@ -16,7 +15,7 @@ const translations = {
     currentDegree: "MSc in agentic ai system",
     undergradSchool: "Shandong University",
     undergradDegree: "Computer Science and Technology",
-    interestsTitle: "Academic Interests",
+    interestsTitle: "Interests",
     interestsText: "NLP, with a focus on LLMs and agents.",
     projectsEyebrow: "Research Training",
     projectsTitle: "Projects",
@@ -26,6 +25,8 @@ const translations = {
     features: "Key Features",
     contribution: "Planned Personal Contribution",
     technology: "Technology",
+    expandProject: "Expand details",
+    collapseProject: "Collapse details",
     project1Title: "Dynamic Long-Term Memory for Personalized LLMs",
     project1Purpose: "Explore how a personalized LLM can maintain and update long-term user preferences as those preferences change over time.",
     project1Features: "A structured memory store, preference-update rules, conflict detection between old and new memories, and evaluation of personalization consistency across multi-session conversations.",
@@ -36,14 +37,13 @@ const translations = {
     project2Contribution: "Implement several compression baselines, define memory-budget experiments, construct evaluation cases for preference preservation, and identify failure patterns caused by over-compression.",
     contactEyebrow: "Get in Touch",
     contactTitle: "Contact",
-    contactText: "For academic communication, you can reach me by email."
+    contactText: "You can reach me by email."
   },
   zh: {
     navHome: "主页",
     navAbout: "关于",
     navProjects: "项目",
     navContact: "联系",
-    homeEyebrow: "个人学术主页",
     homeIntro: "我目前就读于香港理工大学硕士项目。",
     learnMore: "了解更多",
     viewProjects: "查看项目",
@@ -55,7 +55,7 @@ const translations = {
     currentDegree: "MSc in agentic ai system",
     undergradSchool: "山东大学",
     undergradDegree: "计算机科学与技术",
-    interestsTitle: "学术兴趣",
+    interestsTitle: "研究兴趣",
     interestsText: "自然语言处理（NLP），重点关注大语言模型（LLM）与智能体（Agent）。",
     projectsEyebrow: "科研训练",
     projectsTitle: "项目",
@@ -65,6 +65,8 @@ const translations = {
     features: "主要特点",
     contribution: "计划中的个人工作",
     technology: "使用技术",
+    expandProject: "展开详情",
+    collapseProject: "收起详情",
     project1Title: "面向个性化大语言模型的动态长期记忆",
     project1Purpose: "研究个性化大语言模型如何在用户偏好随时间变化的情况下，持续维护并更新长期用户偏好。",
     project1Features: "设计结构化记忆存储、偏好更新规则、新旧记忆冲突检测，并在多轮、多会话场景下评估个性化一致性。",
@@ -75,21 +77,39 @@ const translations = {
     project2Contribution: "计划实现多种记忆压缩基线，设计不同记忆预算下的实验，构造偏好保留评测案例，并分析过度压缩导致的典型失败模式。",
     contactEyebrow: "联系方式",
     contactTitle: "联系",
-    contactText: "如需进行学术交流，可以通过电子邮件联系我。"
+    contactText: "可以通过电子邮件联系我。"
   }
 };
 
 const root = document.documentElement;
+const header = document.getElementById("siteHeader");
 const languageToggle = document.getElementById("languageToggle");
 const themeToggle = document.getElementById("themeToggle");
 const navLinks = [...document.querySelectorAll(".main-nav a")];
 const sections = [...document.querySelectorAll("main section[id]")];
+const projectToggles = [...document.querySelectorAll("[data-project-toggle]")];
+
+function currentLanguage() {
+  return root.lang.startsWith("zh") ? "zh" : "en";
+}
+
+function updateProjectToggleLabel(button) {
+  const expanded = button.getAttribute("aria-expanded") === "true";
+  const language = currentLanguage();
+  const label = button.querySelector("[data-toggle-label]");
+  const icon = button.querySelector(".toggle-icon");
+
+  label.textContent = translations[language][expanded ? "collapseProject" : "expandProject"];
+  icon.textContent = expanded ? "−" : "+";
+}
 
 function setLanguage(language) {
   const safeLanguage = translations[language] ? language : "en";
   root.lang = safeLanguage === "zh" ? "zh-CN" : "en";
 
   document.querySelectorAll("[data-i18n]").forEach((element) => {
+    if (element.hasAttribute("data-toggle-label")) return;
+
     const key = element.dataset.i18n;
     const translatedText = translations[safeLanguage][key];
 
@@ -104,6 +124,7 @@ function setLanguage(language) {
     safeLanguage === "en" ? "Switch to Chinese" : "切换到英文"
   );
 
+  projectToggles.forEach(updateProjectToggleLabel);
   localStorage.setItem("preferredLanguage", safeLanguage);
 }
 
@@ -120,9 +141,61 @@ function setTheme(theme) {
   localStorage.setItem("preferredTheme", safeTheme);
 }
 
+function updateHeaderHeight() {
+  const headerHeight = Math.ceil(header.getBoundingClientRect().height);
+  root.style.setProperty("--header-height", `${headerHeight}px`);
+}
+
+function setActiveNav(sectionId) {
+  navLinks.forEach((link) => {
+    const isActive = link.getAttribute("href") === `#${sectionId}`;
+    link.classList.toggle("active", isActive);
+
+    if (isActive) {
+      link.setAttribute("aria-current", "page");
+    } else {
+      link.removeAttribute("aria-current");
+    }
+  });
+}
+
+function updateActiveNav() {
+  const headerHeight = header.getBoundingClientRect().height;
+  const marker = window.scrollY + headerHeight + 36;
+  const pageBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+
+  let activeSection = sections[0];
+
+  if (pageBottom) {
+    activeSection = sections[sections.length - 1];
+  } else {
+    for (const section of sections) {
+      if (section.offsetTop <= marker) {
+        activeSection = section;
+      } else {
+        break;
+      }
+    }
+  }
+
+  setActiveNav(activeSection.id);
+}
+
+function scrollToSection(target) {
+  updateHeaderHeight();
+  const headerHeight = header.getBoundingClientRect().height;
+  const targetTop = target.getBoundingClientRect().top + window.scrollY - headerHeight - 16;
+
+  window.scrollTo({
+    top: Math.max(0, targetTop),
+    behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"
+  });
+}
+
 languageToggle.addEventListener("click", () => {
-  const nextLanguage = root.lang.startsWith("zh") ? "en" : "zh";
-  setLanguage(nextLanguage);
+  setLanguage(currentLanguage() === "zh" ? "en" : "zh");
+  updateHeaderHeight();
+  updateActiveNav();
 });
 
 themeToggle.addEventListener("click", () => {
@@ -130,29 +203,54 @@ themeToggle.addEventListener("click", () => {
   setTheme(nextTheme);
 });
 
-const observer = new IntersectionObserver(
-  (entries) => {
-    const visibleSection = entries
-      .filter((entry) => entry.isIntersecting)
-      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+navLinks.forEach((link) => {
+  link.addEventListener("click", (event) => {
+    const selector = link.getAttribute("href");
+    const target = document.querySelector(selector);
 
-    if (!visibleSection) return;
+    if (!target) return;
 
-    navLinks.forEach((link) => {
-      const isActive = link.getAttribute("href") === `#${visibleSection.target.id}`;
-      link.classList.toggle("active", isActive);
+    event.preventDefault();
+    scrollToSection(target);
+    history.replaceState(null, "", selector);
+  });
+});
 
-      if (isActive) {
-        link.setAttribute("aria-current", "page");
-      } else {
-        link.removeAttribute("aria-current");
-      }
+projectToggles.forEach((button) => {
+  button.addEventListener("click", () => {
+    const detailsId = button.getAttribute("aria-controls");
+    const details = document.getElementById(detailsId);
+    const currentlyExpanded = button.getAttribute("aria-expanded") === "true";
+
+    button.setAttribute("aria-expanded", String(!currentlyExpanded));
+    details.hidden = currentlyExpanded;
+    updateProjectToggleLabel(button);
+
+    requestAnimationFrame(() => {
+      updateHeaderHeight();
+      updateActiveNav();
+    });
+  });
+});
+
+let scrollFrame = null;
+window.addEventListener(
+  "scroll",
+  () => {
+    if (scrollFrame !== null) return;
+
+    scrollFrame = requestAnimationFrame(() => {
+      updateActiveNav();
+      scrollFrame = null;
     });
   },
-  { threshold: [0.25, 0.45, 0.65] }
+  { passive: true }
 );
 
-sections.forEach((section) => observer.observe(section));
+window.addEventListener("resize", () => {
+  updateHeaderHeight();
+  updateActiveNav();
+});
 
 document.getElementById("currentYear").textContent = new Date().getFullYear();
 
@@ -162,3 +260,13 @@ setLanguage(storedLanguage || "en");
 const storedTheme = localStorage.getItem("preferredTheme");
 const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 setTheme(storedTheme || (systemPrefersDark ? "dark" : "light"));
+
+updateHeaderHeight();
+updateActiveNav();
+
+if (window.location.hash) {
+  const initialTarget = document.querySelector(window.location.hash);
+  if (initialTarget) {
+    requestAnimationFrame(() => scrollToSection(initialTarget));
+  }
+}

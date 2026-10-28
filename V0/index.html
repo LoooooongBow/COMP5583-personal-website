@@ -3,27 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Academic personal website of Zhang Kanghe.">
-  <title>Zhang Kanghe | Academic Homepage</title>
+  <meta name="description" content="Personal website of Zhang Kanghe.">
+  <title>Zhang Kanghe | Personal Website</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="site-header">
+  <header class="site-header" id="siteHeader">
     <div class="header-inner">
       <nav class="main-nav" aria-label="Primary navigation">
         <a href="#home" data-i18n="navHome">Home</a>
         <a href="#about" data-i18n="navAbout">About</a>
-        <a href="#projects" data-i18n="navProjects">Projects</a>
+        <a href="#projects" data-i18n="navProjects">Project</a>
         <a href="#contact" data-i18n="navContact">Contact</a>
       </nav>
 
       <div class="site-controls" aria-label="Display controls">
-        <button id="languageToggle" class="control-button" type="button" aria-label="Switch language">
-          中文
-        </button>
-        <button id="themeToggle" class="control-button" type="button" aria-label="Switch color theme">
-          Dark
-        </button>
+        <button id="languageToggle" class="control-button" type="button" aria-label="Switch language">中文</button>
+        <button id="themeToggle" class="control-button" type="button" aria-label="Switch color theme">Dark</button>
       </div>
     </div>
   </header>
@@ -31,11 +27,8 @@
   <main>
     <section id="home" class="section hero" aria-labelledby="home-title">
       <div class="hero-copy">
-        <p class="eyebrow" data-i18n="homeEyebrow">Academic Homepage</p>
         <h1 id="home-title">张康和 <span class="name-en">(Zhang Kanghe)</span></h1>
-        <p class="hero-intro" data-i18n="homeIntro">
-          I’m MSc Student at The Hong Kong Polytechnic University.
-        </p>
+        <p class="hero-intro" data-i18n="homeIntro">I’m MSc Student at The Hong Kong Polytechnic University.</p>
         <div class="hero-links">
           <a class="text-link" href="#about" data-i18n="learnMore">Learn more about me</a>
           <a class="text-link" href="#projects" data-i18n="viewProjects">View projects</a>
@@ -69,7 +62,7 @@
         </article>
 
         <article class="info-card">
-          <h3 data-i18n="interestsTitle">Academic Interests</h3>
+          <h3 data-i18n="interestsTitle">Interests</h3>
           <p data-i18n="interestsText">NLP, with a focus on LLMs and agents.</p>
         </article>
       </div>
@@ -79,9 +72,7 @@
       <div class="section-heading">
         <p class="eyebrow" data-i18n="projectsEyebrow">Research Training</p>
         <h2 id="projects-title" data-i18n="projectsTitle">Projects</h2>
-        <p class="section-note" data-i18n="projectsNote">
-          Both projects below are proposed research projects and have not yet been implemented.
-        </p>
+        <p class="section-note" data-i18n="projectsNote">Both projects below are proposed research projects and have not yet been implemented.</p>
       </div>
 
       <div class="projects-grid">
@@ -91,36 +82,36 @@
             <span class="project-number">01</span>
           </div>
           <h3 data-i18n="project1Title">Dynamic Long-Term Memory for Personalized LLMs</h3>
+          <button class="project-toggle" type="button" aria-expanded="true" aria-controls="project-1-details" data-project-toggle>
+            <span data-toggle-label data-i18n="collapseProject">Collapse details</span>
+            <span class="toggle-icon" aria-hidden="true">−</span>
+          </button>
 
-          <div class="project-section">
-            <h4 data-i18n="purpose">Purpose</h4>
-            <p data-i18n="project1Purpose">
-              Explore how a personalized LLM can maintain and update long-term user preferences as those preferences change over time.
-            </p>
-          </div>
+          <div class="project-details" id="project-1-details">
+            <div class="project-section">
+              <h4 data-i18n="purpose">Purpose</h4>
+              <p data-i18n="project1Purpose">Explore how a personalized LLM can maintain and update long-term user preferences as those preferences change over time.</p>
+            </div>
 
-          <div class="project-section">
-            <h4 data-i18n="features">Key Features</h4>
-            <p data-i18n="project1Features">
-              A structured memory store, preference-update rules, conflict detection between old and new memories, and evaluation of personalization consistency across multi-session conversations.
-            </p>
-          </div>
+            <div class="project-section">
+              <h4 data-i18n="features">Key Features</h4>
+              <p data-i18n="project1Features">A structured memory store, preference-update rules, conflict detection between old and new memories, and evaluation of personalization consistency across multi-session conversations.</p>
+            </div>
 
-          <div class="project-section">
-            <h4 data-i18n="contribution">Planned Personal Contribution</h4>
-            <p data-i18n="project1Contribution">
-              Design the experimental pipeline, reproduce representative long-term-memory baselines, build controlled preference-change cases, and analyze when memory updates improve or harm personalization.
-            </p>
-          </div>
+            <div class="project-section">
+              <h4 data-i18n="contribution">Planned Personal Contribution</h4>
+              <p data-i18n="project1Contribution">Design the experimental pipeline, reproduce representative long-term-memory baselines, build controlled preference-change cases, and analyze when memory updates improve or harm personalization.</p>
+            </div>
 
-          <div class="project-section">
-            <h4 data-i18n="technology">Technology</h4>
-            <div class="tag-list" aria-label="Technologies">
-              <span>Python</span>
-              <span>PyTorch</span>
-              <span>Transformers</span>
-              <span>LLM APIs / Open Models</span>
-              <span>Vector Retrieval</span>
+            <div class="project-section">
+              <h4 data-i18n="technology">Technology</h4>
+              <div class="tag-list" aria-label="Technologies">
+                <span>Python</span>
+                <span>PyTorch</span>
+                <span>Transformers</span>
+                <span>LLM APIs / Open Models</span>
+                <span>Vector Retrieval</span>
+              </div>
             </div>
           </div>
         </article>
@@ -131,36 +122,36 @@
             <span class="project-number">02</span>
           </div>
           <h3 data-i18n="project2Title">Memory Compression for Long-Term Personalized LLMs</h3>
+          <button class="project-toggle" type="button" aria-expanded="true" aria-controls="project-2-details" data-project-toggle>
+            <span data-toggle-label data-i18n="collapseProject">Collapse details</span>
+            <span class="toggle-icon" aria-hidden="true">−</span>
+          </button>
 
-          <div class="project-section">
-            <h4 data-i18n="purpose">Purpose</h4>
-            <p data-i18n="project2Purpose">
-              Study how long-term user memories can be compressed while preserving the information most useful for future personalized responses.
-            </p>
-          </div>
+          <div class="project-details" id="project-2-details">
+            <div class="project-section">
+              <h4 data-i18n="purpose">Purpose</h4>
+              <p data-i18n="project2Purpose">Study how long-term user memories can be compressed while preserving the information most useful for future personalized responses.</p>
+            </div>
 
-          <div class="project-section">
-            <h4 data-i18n="features">Key Features</h4>
-            <p data-i18n="project2Features">
-              Compare extractive, abstractive, and importance-aware compression strategies; control memory budgets; and measure the trade-off between memory size, retrieval quality, and personalization performance.
-            </p>
-          </div>
+            <div class="project-section">
+              <h4 data-i18n="features">Key Features</h4>
+              <p data-i18n="project2Features">Compare extractive, abstractive, and importance-aware compression strategies; control memory budgets; and measure the trade-off between memory size, retrieval quality, and personalization performance.</p>
+            </div>
 
-          <div class="project-section">
-            <h4 data-i18n="contribution">Planned Personal Contribution</h4>
-            <p data-i18n="project2Contribution">
-              Implement several compression baselines, define memory-budget experiments, construct evaluation cases for preference preservation, and identify failure patterns caused by over-compression.
-            </p>
-          </div>
+            <div class="project-section">
+              <h4 data-i18n="contribution">Planned Personal Contribution</h4>
+              <p data-i18n="project2Contribution">Implement several compression baselines, define memory-budget experiments, construct evaluation cases for preference preservation, and identify failure patterns caused by over-compression.</p>
+            </div>
 
-          <div class="project-section">
-            <h4 data-i18n="technology">Technology</h4>
-            <div class="tag-list" aria-label="Technologies">
-              <span>Python</span>
-              <span>PyTorch</span>
-              <span>Transformers</span>
-              <span>Embedding Models</span>
-              <span>Vector Database</span>
+            <div class="project-section">
+              <h4 data-i18n="technology">Technology</h4>
+              <div class="tag-list" aria-label="Technologies">
+                <span>Python</span>
+                <span>PyTorch</span>
+                <span>Transformers</span>
+                <span>Embedding Models</span>
+                <span>Vector Database</span>
+              </div>
             </div>
           </div>
         </article>
@@ -174,7 +165,7 @@
       </div>
 
       <div class="contact-card">
-        <p data-i18n="contactText">For academic communication, you can reach me by email.</p>
+        <p data-i18n="contactText">You can reach me by email.</p>
         <a class="email-link" href="mailto:k18803416491@163.com">k18803416491@163.com</a>
       </div>
     </section>
