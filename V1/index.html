@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Personal website of Zhang Kanghe.">
+  <title>Zhang Kanghe | Personal Website</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <nav class="main-nav" aria-label="Primary navigation">
+        <a href="#home" data-i18n="navHome">Home</a>
+        <a href="#about" data-i18n="navAbout">About</a>
+        <a href="#projects" data-i18n="navProjects">Project</a>
+        <a href="#contact" data-i18n="navContact">Contact</a>
+      </nav>
+
+      <div class="site-controls" aria-label="Display controls">
+        <button id="languageToggle" class="control-button" type="button" aria-label="Switch language">中文</button>
+        <button id="themeToggle" class="control-button" type="button" aria-label="Switch to dark theme">Dark</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="section hero" aria-labelledby="home-title">
+      <div class="hero-copy">
+        <h1 id="home-title">张康和 <span class="name-en">(Zhang Kanghe)</span></h1>
+        <p class="hero-intro" data-i18n="homeIntro">I’m an MSc student at The Hong Kong Polytechnic University.</p>
+      </div>
+
+      <div class="avatar-frame" aria-label="Reserved portrait area">
+        <div class="avatar-placeholder" role="img" aria-label="Portrait placeholder">
+          <span data-i18n="avatarPlaceholder">Photo will be added later</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section" aria-labelledby="about-title">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="aboutEyebrow">Profile</p>
+        <h2 id="about-title" data-i18n="aboutTitle">About</h2>
+      </div>
+
+      <div class="about-grid">
+        <article class="info-card">
+          <h3 data-i18n="educationTitle">Education</h3>
+          <div class="education-item">
+            <p class="item-title" data-i18n="currentSchool">The Hong Kong Polytechnic University</p>
+            <p data-i18n="currentDegree">MSc in agentic AI system</p>
+          </div>
+          <div class="education-item">
+            <p class="item-title" data-i18n="undergradSchool">Shandong University</p>
+            <p data-i18n="undergradDegree">Computer Science and Technology</p>
+          </div>
+        </article>
+
+        <article class="info-card">
+          <h3 data-i18n="interestsTitle">Interests</h3>
+          <p data-i18n="interestsText">NLP, with a focus on LLMs and agents.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="projects" class="section" aria-labelledby="projects-title">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="projectsEyebrow">Research Training</p>
+        <h2 id="projects-title" data-i18n="projectsTitle">Projects</h2>
+        <p class="section-note" data-i18n="projectsNote">Both projects below are proposed research projects and have not yet been implemented.</p>
+      </div>
+
+      <div class="projects-grid">
+        <article class="project-card">
+          <div class="project-topline">
+            <span class="status-badge" data-i18n="proposed">Proposed Project</span>
+            <span class="project-number">01</span>
+          </div>
+          <h3 data-i18n="project1Title">Dynamic Long-Term Memory for Personalized LLMs</h3>
+          <button class="project-toggle" type="button" aria-expanded="true" aria-controls="project-1-details" data-project-toggle>
+            <span data-toggle-label data-i18n="collapseProject">Collapse details</span>
+            <span class="toggle-icon" aria-hidden="true">−</span>
+          </button>
+
+          <div class="project-details" id="project-1-details">
+            <div class="project-section">
+              <h4 data-i18n="purpose">Purpose</h4>
+              <p data-i18n="project1Purpose">Explore how a personalized LLM can maintain and update long-term user preferences as those preferences change over time.</p>
+            </div>
+
+            <div class="project-section">
+              <h4 data-i18n="features">Key Features</h4>
+              <p data-i18n="project1Features">A structured memory store, preference-update rules, conflict detection between old and new memories, and evaluation of personalization consistency across multi-session conversations.</p>
+            </div>
+
+            <div class="project-section">
+              <h4 data-i18n="contribution">Planned Personal Contribution</h4>
+              <p data-i18n="project1Contribution">Design the experimental pipeline, reproduce representative long-term-memory baselines, build controlled preference-change cases, and analyze when memory updates improve or harm personalization.</p>
+            </div>
+
+            <div class="project-section">
+              <h4 data-i18n="technology">Technology</h4>
+              <div class="tag-list" aria-label="Technologies">
+                <span>Python</span>
+                <span>PyTorch</span>
+                <span>Transformers</span>
+                <span>LLM APIs / Open Models</span>
+                <span>Vector Retrieval</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-topline">
+            <span class="status-badge" data-i18n="proposed">Proposed Project</span>
+            <span class="project-number">02</span>
+          </div>
+          <h3 data-i18n="project2Title">Memory Compression for Long-Term Personalized LLMs</h3>
+          <button class="project-toggle" type="button" aria-expanded="true" aria-controls="project-2-details" data-project-toggle>
+            <span data-toggle-label data-i18n="collapseProject">Collapse details</span>
+            <span class="toggle-icon" aria-hidden="true">−</span>
+          </button>
+
+          <div class="project-details" id="project-2-details">
+            <div class="project-section">
+              <h4 data-i18n="purpose">Purpose</h4>
+              <p data-i18n="project2Purpose">Study how long-term user memories can be compressed while preserving the information most useful for future personalized responses.</p>
+            </div>
+
+            <div class="project-section">
+              <h4 data-i18n="features">Key Features</h4>
+              <p data-i18n="project2Features">Compare extractive, abstractive, and importance-aware compression strategies; control memory budgets; and measure the trade-off between memory size, retrieval quality, and personalization performance.</p>
+            </div>
+
+            <div class="project-section">
+              <h4 data-i18n="contribution">Planned Personal Contribution</h4>
+              <p data-i18n="project2Contribution">Implement several compression baselines, define memory-budget experiments, construct evaluation cases for preference preservation, and identify failure patterns caused by over-compression.</p>
+            </div>
+
+            <div class="project-section">
+              <h4 data-i18n="technology">Technology</h4>
+              <div class="tag-list" aria-label="Technologies">
+                <span>Python</span>
+                <span>PyTorch</span>
+                <span>Transformers</span>
+                <span>Embedding Models</span>
+                <span>Vector Database</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact-section" aria-labelledby="contact-title">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="contactEyebrow">Get in Touch</p>
+        <h2 id="contact-title" data-i18n="contactTitle">Contact</h2>
+      </div>
+
+      <div class="contact-card">
+        <p data-i18n="contactText">You can reach me by email.</p>
+        <a class="email-link" href="mailto:k18803416491@163.com">k18803416491@163.com</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="currentYear"></span> Zhang Kanghe</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

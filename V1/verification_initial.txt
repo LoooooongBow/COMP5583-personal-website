@@ -1,0 +1,81 @@
+V1 few-shot candidate verification
+UTC: 2026-10-30T14:48:27+00:00
+AI-operated automated checks, not independent LLM grades.
+All four sites use the same local server, browser and checks; each uses a fresh context.
+Browser: msedge 156.0.4314.50
+
+## V0
+en/light: {'lang': 'en', 'theme': 'light', 'text': 'Dark', 'aria': 'Switch to dark theme'}
+zh/light: {'lang': 'zh-CN', 'theme': 'light', 'text': 'Dark', 'aria': 'Switch to dark theme'}
+zh/dark: {'lang': 'zh-CN', 'theme': 'dark', 'text': 'Light', 'aria': 'Switch to light theme'}
+zh/dark after reload: {'lang': 'zh-CN', 'theme': 'dark', 'text': 'Light', 'aria': 'Switch to light theme'}
+en/dark: {'lang': 'en', 'theme': 'dark', 'text': 'Light', 'aria': 'Switch to light theme'}
+Home after language cycle/reload: I’m MSc Student at The Hong Kong Polytechnic University.
+Degree display: MSc in agentic ai system
+2560x1440, both collapsed, click Project: active=#projects, heading={'x': 720, 'y': 410.84375, 'width': 760, 'height': 56.3125}
+Intent release: wheel-down=#projects; wheel-up=#home; End=#contact
+1440x900, collapsed Project: #projects
+390x844, collapsed Project: #projects
+Uncaught page errors: []
+
+## copy
+en/light: {'lang': 'en', 'theme': 'light', 'text': 'Dark', 'aria': 'Switch to dark theme'}
+zh/light: {'lang': 'zh-CN', 'theme': 'light', 'text': 'Dark', 'aria': 'Switch to dark theme'}
+zh/dark: {'lang': 'zh-CN', 'theme': 'dark', 'text': 'Light', 'aria': 'Switch to light theme'}
+zh/dark after reload: {'lang': 'zh-CN', 'theme': 'dark', 'text': 'Light', 'aria': 'Switch to light theme'}
+en/dark: {'lang': 'en', 'theme': 'dark', 'text': 'Light', 'aria': 'Switch to light theme'}
+Home after language cycle/reload: I’m an MSc student at The Hong Kong Polytechnic University.
+Degree display: MSc in agentic AI system
+2560x1440, both collapsed, click Project: active=#projects, heading={'x': 720, 'y': 410.84375, 'width': 760, 'height': 56.3125}
+Intent release: wheel-down=#projects; wheel-up=#home; End=#contact
+1440x900, collapsed Project: #projects
+390x844, collapsed Project: #projects
+Uncaught page errors: []
+
+## localization
+en/light: {'lang': 'en', 'theme': 'light', 'text': 'Dark', 'aria': 'Switch to dark theme'}
+zh/light: {'lang': 'zh-CN', 'theme': 'light', 'text': '深色', 'aria': '切换到深色主题'}
+zh/dark: {'lang': 'zh-CN', 'theme': 'dark', 'text': '浅色', 'aria': '切换到浅色主题'}
+zh/dark after reload: {'lang': 'zh-CN', 'theme': 'dark', 'text': '浅色', 'aria': '切换到浅色主题'}
+en/dark: {'lang': 'en', 'theme': 'dark', 'text': 'Light', 'aria': 'Switch to light theme'}
+Home after language cycle/reload: I’m MSc Student at The Hong Kong Polytechnic University.
+Degree display: MSc in agentic ai system
+2560x1440, both collapsed, click Project: active=#projects, heading={'x': 720, 'y': 410.84375, 'width': 760, 'height': 56.3125}
+Intent release: wheel-down=#projects; wheel-up=#home; End=#contact
+1440x900, collapsed Project: #projects
+390x844, collapsed Project: #projects
+Uncaught page errors: []
+
+## navigation
+en/light: {'lang': 'en', 'theme': 'light', 'text': 'Dark', 'aria': 'Switch to dark theme'}
+zh/light: {'lang': 'zh-CN', 'theme': 'light', 'text': 'Dark', 'aria': 'Switch to dark theme'}
+zh/dark: {'lang': 'zh-CN', 'theme': 'dark', 'text': 'Light', 'aria': 'Switch to light theme'}
+zh/dark after reload: {'lang': 'zh-CN', 'theme': 'dark', 'text': 'Light', 'aria': 'Switch to light theme'}
+en/dark: {'lang': 'en', 'theme': 'dark', 'text': 'Light', 'aria': 'Switch to light theme'}
+Home after language cycle/reload: I’m MSc Student at The Hong Kong Polytechnic University.
+Degree display: MSc in agentic ai system
+2560x1440, both collapsed, click Project: active=#projects, heading={'x': 720, 'y': 410.84375, 'width': 760, 'height': 56.3125}
+Intent release: wheel-down=#contact; wheel-up=#home; End=#contact
+1440x900, collapsed Project: #projects
+390x844, collapsed Project: #projects
+Uncaught page errors: []
+
+## Observed improvement matrix (not scores)
+Version | corrected copy | localized theme labels | collapsed large-screen feedback
+V0 | False | False | True
+copy | True | False | True
+localization | False | True | True
+navigation | False | False | True
+
+## Harness result
+FAIL
+V0: collapsed large-screen observation differs from intended scope
+V0: collapsed navigation not repeatable
+V0: explicit target stuck after scroll gesture at bottom
+copy: collapsed large-screen observation differs from intended scope
+copy: collapsed navigation not repeatable
+copy: explicit target stuck after scroll gesture at bottom
+localization: collapsed large-screen observation differs from intended scope
+localization: collapsed navigation not repeatable
+localization: explicit target stuck after scroll gesture at bottom
+Limits: local Edge only; no independent LLM score, no deployment claim; touch gestures and scrollbar dragging not fully exercised.
